@@ -1,17 +1,23 @@
-using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+ //Using for XML comments with swagger
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Travel.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Travel.Models;
-using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.Authorization;
+
+
+
 
 namespace Travel.Controllers
 {
+  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
   [Route("api/[controller]")]
   [ApiController]
+  [Produces("application/json")]
   public class ReviewsController : ControllerBase
   {
     private readonly TravelContext _db;
@@ -21,6 +27,10 @@ namespace Travel.Controllers
       _db = db;
     }
     // GET api/review
+
+    ///<summary>
+    /// Get a specific review.
+    /// </summary>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Review>>> Get(string name, string city, string country, int rating)
     {
@@ -47,6 +57,10 @@ namespace Travel.Controllers
     }
 
     // GET api/review/1
+
+    ///<summary>
+    /// Get a specific review by Id.
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<ActionResult<Review>> GetReview(int id)
     {
@@ -61,7 +75,30 @@ namespace Travel.Controllers
     }
 
     // POST api/review
+
+    ///<summary>
+    /// Add a new review.
+    /// </summary>
+    /// <param name="review"></param>
+    /// <returns>A newly created Review</returns>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /Reviews
+    ///     {
+    ///        "name": "Your name",
+    ///        "city": "CityName",
+    ///        "country": "CountryName",
+    ///        "rating": "int",
+    ///        "description": "description of place"
+    ///     }
+    ///
+    /// </remarks>
+    /// <response code="201">Returns the newly created review</response>
+    /// <response code="400">If the review is null</response>
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<Review>> Post(Review review)
     {
       _db.Reviews.Add(review);
@@ -72,6 +109,10 @@ namespace Travel.Controllers
 
     // PUT: api/Reviews/1
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+    ///<summary>
+    /// Update a specific review.
+    /// </summary>
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, Review review, string name)
     {
@@ -116,7 +157,12 @@ namespace Travel.Controllers
     {
       return _db.Reviews.Any(e => e.Name == name);
     }
+
     // DELETE: api/Reviews/5
+
+    ///<summary>
+    /// Deletes a specific review.
+    /// </summary>
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteReview(int id)
     {

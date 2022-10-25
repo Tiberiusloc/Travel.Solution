@@ -19,7 +19,7 @@ namespace ApiVersioningSampleApp.Controllers
     }
     
     // [ApiVersion("2.0", Deprecated = true)]
-    [Route("api/v2/Values")]
+    [Route("api/Values")] // Use different route names
     public class ValuesV2Controller : Controller
     {
   // GET api/values
