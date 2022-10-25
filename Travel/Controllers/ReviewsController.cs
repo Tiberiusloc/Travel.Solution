@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Travel.Models;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 namespace Travel.Controllers
 {
@@ -95,14 +96,14 @@ namespace Travel.Controllers
         {
           throw;
         }
-        if (!UserExists(name))
-        {
-          return NotFound();
-        }
-        else
-        {
-          throw;
-        }
+        // if (!UserExists(name))
+        // {
+        //   return NotFound();
+        // }
+        // else
+        // {
+        //   throw;
+        // }
       }
       return NoContent();
     }
