@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiVersioningSampleApp.Controllers
@@ -19,7 +16,7 @@ namespace ApiVersioningSampleApp.Controllers
     }
     
     // [ApiVersion("2.0", Deprecated = true)]
-    [Route("api/Values")] // Use different route names
+    [Route("api/v2/Values")] // Use different route names
     public class ValuesV2Controller : Controller
     {
   // GET api/values

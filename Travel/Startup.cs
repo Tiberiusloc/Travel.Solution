@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using ApiVersioningSampleApp.Controllers; //Using to access controllers
+// using ApiVersioningSampleApp.Controllers; //Using to access controllers
 using Microsoft.OpenApi.Models; //Using for Swagger OpenAPI
 using System; //Using for Uri
 using System.Reflection; //Using for XML comments with swagger
@@ -81,8 +81,8 @@ namespace Travel
                 o.AssumeDefaultVersionWhenUnspecified = true;
                 o.DefaultApiVersion = new ApiVersion(1, 0);
                 o.ApiVersionReader = new HeaderApiVersionReader("x-api-version");
-                o.Conventions.Controller<ValuesV1Controller>().HasApiVersion(new ApiVersion(1, 0)); //Sets ValuesV1 Controller to it's own version 
-                o.Conventions.Controller<ValuesV2Controller>().HasApiVersion(new ApiVersion(2, 0)); //Sets ValuesV2 Controller to it's own version 
+                // o.Conventions.Controller<ValuesV1Controller>().HasApiVersion(new ApiVersion(1, 0)); //Sets ValuesV1 Controller to it's own version 
+                // o.Conventions.Controller<ValuesV2Controller>().HasApiVersion(new ApiVersion(2, 0)); //Sets ValuesV2 Controller to it's own version 
                 // o.ApiVersionReader = new QueryStringOrHeaderApiVersionReader("x-api-version");
             });
             services.AddSwaggerGen(options =>
